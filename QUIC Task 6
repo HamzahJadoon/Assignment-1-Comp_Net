@@ -1,0 +1,46 @@
+1. What is the name of website?
+The website accessed is www.google.com
+
+2. Find the packet that contains the Initial QUIC handshake. What information is exchanged here?
+
+The packet labeled Frame 17082 is a QUIC Initial packet, identified by:
+Long Header with Initial (0x0) type
+Version Flag set
+Packet Number: 0
+Connection IDs: Source and Destination both set to 0x0000000000000000
+Payload Length: 1256 bytes
+
+Information exchanged includes:
+QUIC version
+Connection IDs
+Embedded TLS ClientHello
+Transport parameters (e.g., max stream data, idle timeout)
+
+3. Identify the QUIC packet that contains the TLS ClientHello (QUIC embeds TLS handshake inside QUIC).
+
+The Initial packet shown in your screenshot contains the TLS ClientHello inside its payload. 
+You can expand the QUIC payload to view:
+TLSv1.3 Handshake Protocol: Client Hello
+Extensions like ALPN (for HTTP/3), supported versions, key share, etc.
+
+4. Which QUIC version is used in your trace?
+The QUIC version used is: Q046
+
+5. Locate the packet where 0-RTT or 1-RTT keys are first used?
+The packet shows:
+ACK Frame acknowledging packet 0
+Padding Frame with 1250 bytes
+This suggests the handshake is progressing, and the next packets will likely use 1-RTT encryption. To confirm, look for packets labeled:
+1-RTT Protected (used after full handshake)
+0-RTT Protected (used for fast reconnects)
+
+6. Find the first packet that carries application data (HTTP/3).
+How does this differ from HTTP over TCP?
+
+While the current packet contains ACK and Padding frames, application data (HTTP/3) will appear in packets with STREAM frames.
+Differences from HTTP over TCP:
+QUIC uses UDP, not TCP
+No head-of-line blocking
+Faster handshake (0-RTT possible)
+Built-in encryption and multiplexing
+HTTP/3 is carried directly over QUIC, not layered on top of TCP
