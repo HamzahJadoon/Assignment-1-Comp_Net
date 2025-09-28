@@ -1,0 +1,23 @@
+1. What is the name of website?
+Host: httpforever.com\r\n
+
+2. Find the packet that contains the first GET request for the website you have accessed.
+GET /css/images/header-major-on-dark.svg HTTP/1.1\r\n
+
+3. Describe all headers and their values in this GET request message.
+Request Method: GET
+Request URI: /css/images/header-major-on-dark.svg
+Request Version: HTTP/1.1
+
+4. Identify the status code in the first server response.
+HTTP/1.1 200 OK
+
+5. How many HTTP response messages are exchanged in total?
+the total response on HTTP exchange are 18
+
+6. Determine whether the connection is persistent or not. Justify with evidence from packet captures.
+ the connection is persistent. Evidence:
+
+The Connection: Keep-Alive header in the GET request
+
+Multiple requests/responses over the same TCP connection (check TCP stream index)
