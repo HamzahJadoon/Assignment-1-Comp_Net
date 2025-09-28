@@ -1,0 +1,50 @@
+For the HTTPS based website access, answer the following:
+
+1. What is the name of website?
+The destination IP in your TLS packet is 172.217.194.113, which resolves to www.google.com.
+
+2.Find the packet that contains the ClientHello message for the website you are accessing.
+
+Protocol: TLSv1.2
+Packet Type: Handshake
+Handshake Type: Client Hello (1)
+Length: 1751 bytes
+
+3.List all the TLS extensions included in the ClientHello.
+
+server_name
+extended_master_secret
+renegotiation_info
+supported_groups
+ec_point_formats
+session_ticket
+application_layer_protocol_negotiation (ALPN)
+status_request
+signature_algorithms
+signed_certificate_timestamp
+key_share
+supported_versions
+psk_key_exchange_modes
+certificate_authorities
+oid_filters
+post_handshake_auth
+signature_algorithms_cert
+padding
+
+4.Identify the ServerHello message. What cipher suite is chosen by the server?
+
+Packet Type: Server Hello
+TLS Version: TLS 1.2 (0x0303)
+Cipher Suite Chosen: → TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xc030)
+
+5.Locate the Certificate message. Extract the server’s certificate information (issuer, subject, validity dates).
+
+
+
+6.After the TLS handshake, identify the first encrypted application data packet. Why can’t you directly see the
+HTTP headers in this packet?
+
+Packet Type: TLSv1.2 Record Layer: Application Data
+
+Reason You Can’t See HTTP Headers:
+Because the data is encrypted after the TLS handshake. HTTPS wraps HTTP inside TLS, so headers and content are hidden unless decrypted with session keys.
